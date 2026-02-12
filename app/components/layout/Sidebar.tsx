@@ -12,6 +12,7 @@ import {
   FiUser,
   FiSettings,
   FiChevronRight,
+  FiTerminal,
   FiChevronLeft,
   FiDroplet,
   FiSmartphone,
@@ -32,32 +33,51 @@ const navItems: NavItem[] = [
     name: "Dashboard",
     path: "/dashboard",
     icon: <FiHome size={20} />,
-    color: "#c5e6ff", // Light blue
+    color: "#c5e6ff", 
   },
+   {
+  name: 'HTML Course',
+  path: '/dashboard/html',
+  icon: <FiCode size={20} />, 
+  color: '#475569' 
+},
+{
+  name: 'CSS Course',
+  path: '/dashboard/css',
+  icon: <FiDroplet size={20} />, 
+  color: '#475569' 
+},
+{
+  name: 'JavaScript Course',
+  path: '/dashboard/javascript',
+  icon: <FiTerminal size={20} />, 
+  color: '#475569' 
+},
   {
     name: "CSS Themes",
     path: "/dashboard/themes",
     icon: <FiDroplet size={20} />,
-    color: "#d2b7ff", // Light purple
+    color: "#d2b7ff", 
   },
    {
     name: 'Button Gallery',
     path: '/dashboard/buttons',
-    icon: <FiSmartphone size={20} />, // or <FiCpu size={20} />, <FiBox size={20} />
+    icon: <FiSmartphone size={20} />, 
     color: '#ffb7c5'
   },
   {
      name: 'prompt for ai',
     path: '/dashboard/prompts',
-    icon: <AiFillRobot size={20} />, // or <FiCpu size={20} />, <FiBox size={20} />
+    icon: <AiFillRobot size={20} />, 
     color: '#ffb7c5'
   },
    {
     name: 'Icons Gallery',
     path: '/dashboard/icons',
-    icon: <FiGrid size={20} />, // ✅ Valid Feather icon - no more error!
+    icon: <FiGrid size={20} />, 
     color: '#b7ffca'
   }
+ 
 ];
 
 export default function Sidebar() {
