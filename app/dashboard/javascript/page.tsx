@@ -13,7 +13,7 @@ import { javascriptCourseData, JavaScriptConcept, javascriptCategories, javascri
 
 export default function JavaScriptCoursePage() {
   const [copiedId, setCopiedId] = useState<number | null>(null);
-  const [activeLanguage, setActiveLanguage] = useState<'en' | 'fr'>('en');
+  const [activeLanguage, setActiveLanguage] = useState<'en' | 'fr' | 'ar'>('en');
   const [activeSection, setActiveSection] = useState<number>(1);
   const sectionRefs = useRef<{ [key: number]: HTMLElement | null }>({});
 
@@ -34,7 +34,7 @@ function greet(name) {
 
 alert(greet("Marie"));`;
 
-  // What is JavaScript in 2 languages
+  // What is JavaScript in 3 languages - ONLY FOR INTRO SECTION
   const jsDescription = {
     en: {
       title: "⚡ What is JavaScript?",
@@ -43,6 +43,10 @@ alert(greet("Marie"));`;
     fr: {
       title: "⚡ Qu'est-ce que JavaScript ?",
       paragraph: "JavaScript est un langage de programmation essentiel pour le développement web. Il ajoute de l'interactivité aux sites web—animations, validation de formulaires, mises à jour dynamiques sans rechargement. Avec JavaScript, vous pouvez manipuler le DOM pour modifier dynamiquement le contenu et le style, créant ainsi des applications web interactives. Considérez JavaScript comme le cerveau de chaque site web—il donne à la page son comportement et son intelligence."
+    },
+    ar: {
+      title: "⚡ ما هي لغة JavaScript؟",
+      paragraph: "JavaScript هي لغة برمجة أساسية لتطوير الويب. تضيف التفاعلية إلى المواقع—الرسوم المتحركة، التحقق من صحة النماذج، التحديثات الديناميكية دون إعادة تحميل الصفحة. باستخدام JavaScript، يمكنك التعامل مع DOM لتغيير المحتوى والتصميم ديناميكيًا، مما يتيح إنشاء تطبيقات ويب تفاعلية. اعتبر JavaScript بمثابة الدماغ لكل موقع ويب—فهو يمنح الصفحة سلوكها وذكائها."
     }
   };
 
@@ -95,7 +99,7 @@ alert(greet("Marie"));`;
         {/* LEFT CONTENT */}
         <div className="flex-1 space-y-8">
           
-          {/* WHAT IS JAVASCRIPT */}
+          {/* WHAT IS JAVASCRIPT - WITH 3 LANGUAGE TOGGLE */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,10 +128,20 @@ alert(greet("Marie"));`;
                 >
                   FR
                 </button>
+                <button 
+                  onClick={() => setActiveLanguage('ar')} 
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium ${
+                    activeLanguage === 'ar' 
+                      ? 'bg-white text-amber-900' 
+                      : 'text-white/70 hover:text-white hover:bg-white/20'
+                  }`}
+                >
+                  AR
+                </button>
               </div>
             </div>
 
-            <div className="p-6 text-left" dir="ltr">
+            <div className={`p-6 ${activeLanguage === 'ar' ? 'text-right' : 'text-left'}`} dir={activeLanguage === 'ar' ? 'rtl' : 'ltr'}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-white/20 rounded-xl">
                   <FiCpu className="text-white" size={24} />
@@ -139,7 +153,7 @@ alert(greet("Marie"));`;
               </p>
               <div className="mt-6 flex items-center justify-between">
                 <span className="px-3 py-1 bg-white/20 rounded-full text-xs text-white/90">
-                  🧠 The brain of the web
+                  🧠 Brain of the web
                 </span>
                 <motion.button 
                   whileHover={{ scale: 1.05 }} 
@@ -153,7 +167,7 @@ alert(greet("Marie"));`;
             </div>
           </motion.div>
 
-          {/* JAVASCRIPT BASICS STRUCTURE */}
+          {/* JAVASCRIPT BASICS STRUCTURE - ENGLISH ONLY */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -177,7 +191,7 @@ alert(greet("Marie"));`;
                   <div><span className="text-blue-600">const</span> <span className="text-gray-900">PI</span> = <span className="text-amber-600">3.14</span>;</div>
                   <div> </div>
                   <div><span className="text-purple-600">// Function</span></div>
-                  <div><span className="text-blue-600">function</span> <span className="text-amber-600">greet</span>(<span className="text-gray-900">name</span>) {}</div>
+                  <div><span className="text-blue-600">function</span> <span className="text-amber-600">greet</span>(<span className="text-gray-900">name</span>) {'{'}</div>
                   <div className="ml-4"><span className="text-blue-600">return</span> <span className="text-green-600">'Hello '</span> + name;</div>
                   <div>{'}'}</div>
                   <div> </div>
@@ -219,7 +233,7 @@ alert(greet("Marie"));`;
             </div>
           </motion.div>
 
-          {/* QUICK REFERENCE CARDS */}
+          {/* QUICK REFERENCE CARDS - ENGLISH ONLY */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {javascriptQuickReference.map((ref, idx) => (
               <motion.div
@@ -243,7 +257,7 @@ alert(greet("Marie"));`;
             ))}
           </div>
 
-          {/* ALL LESSONS - SIMPLE INNERHTML PREVIEW */}
+          {/* ALL LESSONS - ENGLISH ONLY */}
           <div className="space-y-12 mt-8">
             {javascriptCourseData.map((lesson: JavaScriptConcept) => (
               <section
@@ -282,7 +296,7 @@ alert(greet("Marie"));`;
                     >
                       {lesson.id}
                     </span>
-                    <h2 className="text-sm font-semibold text-gray-700">Code Example</h2>
+                    <h2 className="text-sm font-semibold text-gray-700">Practice & Examples</h2>
                   </div>
                   <div className="flex items-center gap-1">
                     {lesson.id > 1 && (
@@ -308,7 +322,7 @@ alert(greet("Marie"));`;
                   </div>
                 </div>
 
-                {/* SIMPLE LESSON CARD - USING INNERHTML */}
+                {/* SIMPLE LESSON CARD */}
                 <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-md">
                   <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 p-5 mx-5">
                     
@@ -334,14 +348,10 @@ alert(greet("Marie"));`;
                         </pre>
                       </div>
 
-                      <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
-                        <p className="text-[10px] text-amber-700 flex items-center gap-1.5">
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-2">
+                        <p className="text-[10px] text-blue-700 flex items-center gap-1">
                           <FiInfo size={12} />
-                          {lesson.preview.content.map((line, i) => (
-                            <span key={i} className="font-mono bg-white/50 px-1.5 py-0.5 rounded">
-                              {line}
-                            </span>
-                          ))}
+                          Copy and paste inside &lt;script&gt; tag
                         </p>
                       </div>
 
@@ -372,7 +382,7 @@ alert(greet("Marie"));`;
           </div>
         </div>
 
-        {/* RIGHT SIDEBAR - w-64 */}
+        {/* RIGHT SIDEBAR - ENGLISH ONLY */}
         <div className="w-64 hidden lg:block">
           <div className="sticky top-24 space-y-4">
             <div className="bg-white rounded-xl border border-gray-200 p-3">
