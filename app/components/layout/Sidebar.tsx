@@ -16,6 +16,17 @@ import {
   FiChevronLeft,
   FiDroplet,
   FiSmartphone,
+  FiWind,
+  FiZap,
+  FiBox,
+  FiLayers,
+  FiLayout,
+  FiGitBranch,
+  FiTool,
+  FiFileText,
+  FiPlay,
+  FiFeather,
+  FiImage,
 } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import { AiFillRobot } from "react-icons/ai";
@@ -33,50 +44,68 @@ const navItems: NavItem[] = [
     name: "Dashboard",
     path: "/dashboard",
     icon: <FiHome size={20} />,
-    color: "#c5e6ff",
+    color: "#c5e6ff", // Light Blue
   },
   {
-    name: 'HTML Course',
-    path: '/dashboard/html',
-    icon: <FiCode size={20} />,
-    color: '#475569'
+    name: "HTML Course",
+    path: "/dashboard/html",
+    icon: <FiCode size={20} />, // </> - Perfect for HTML
+    color: "#475569", // Slate 600
   },
   {
-    name: 'CSS Course',
-    path: '/dashboard/css',
-    icon: <FiDroplet size={20} />,
-    color: '#475569'
+    name: "CSS Course",
+    path: "/dashboard/css",
+    icon: <FiImage size={20} />, // 🎨 - Colors, design, styling (EXISTS in react-icons/fi!)
+    color: "#d2b7ff", // Light Purple
   },
   {
-    name: 'JavaScript Course',
-    path: '/dashboard/javascript',
-    icon: <FiTerminal size={20} />,
-    color: '#475569'
+    name: "JavaScript Course",
+    path: "/dashboard/javascript",
+    icon: <FiZap size={20} />, // ⚡ - Dynamic, fast, interactive
+    color: "#ffb7c5", // Pink
+  },
+  {
+    name: "Tailwind CSS Course",
+    path: "/dashboard/tailwindcss",
+    icon: <FiWind size={20} />, // 💨 - Wind, perfect for Tailwind
+    color: "#b7ffca", // Light Green
+  },
+  {
+    name: "Code Playground",
+    path: "/dashboard/playground",
+    icon: <FiPlay size={20} />, // ▶️ - Run/Play button
+    color: "#475569", // Slate 600
+  },
+  {
+    name: "UI Components",
+    path: "/dashboard/components",
+    icon: <FiBox size={20} />,
+    color: "#c5e6ff", // Light Blue
   },
   {
     name: "CSS Themes",
     path: "/dashboard/themes",
-    icon: <FiDroplet size={20} />,
-    color: "#d2b7ff",
+    icon: <FiLayers size={20} />, // 📚 - Layers of themes
+    color: "#d2b7ff", // Light Purple
   },
   {
-    name: 'Button Gallery',
-    path: '/dashboard/buttons',
-    icon: <FiSmartphone size={20} />,
-    color: '#ffb7c5'
+    name: "Button Gallery",
+    path: "/dashboard/buttons",
+    icon: <FiSmartphone size={20} />, // 📱 - UI components
+    color: "#ffb7c5", // Pink
   },
   {
-    name: 'Prompt for AI',
-    path: '/dashboard/prompts',
-    icon: <AiFillRobot size={20} />,
-    color: '#ffb7c5'
+    name: "Prompt for AI",
+    path: "/dashboard/prompts",
+    icon: <AiFillRobot size={20} />, // 🤖 - AI/Robot
+    color: "#ffb7c5", // Pink
   },
   {
-    name: 'Icons Gallery',
-    path: '/dashboard/icons',
-    icon: <FiGrid size={20} />,
-    color: '#b7ffca'
-  }
+    name: "Icons Gallery",
+    path: "/dashboard/icons",
+    icon: <FiFeather size={20} />, // 🪶 - Feather icons (the library name!)
+    color: "#b7ffca", // Light Green
+  },
 ];
 
 export default function Sidebar() {
@@ -88,7 +117,7 @@ export default function Sidebar() {
 
   // Load saved state from localStorage on mount
   useEffect(() => {
-    const savedState = localStorage.getItem('sidebarOpen');
+    const savedState = localStorage.getItem("sidebarOpen");
     if (savedState !== null) {
       setIsOpen(JSON.parse(savedState));
     }
@@ -98,7 +127,7 @@ export default function Sidebar() {
   // Save state to localStorage whenever it changes (only from user interaction)
   useEffect(() => {
     if (isInitialized) {
-      localStorage.setItem('sidebarOpen', JSON.stringify(isOpen));
+      localStorage.setItem("sidebarOpen", JSON.stringify(isOpen));
     }
   }, [isOpen, isInitialized]);
 
@@ -109,8 +138,8 @@ export default function Sidebar() {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Handle touch gestures for mobile
@@ -211,12 +240,12 @@ export default function Sidebar() {
         initial={false}
         animate={isOpen ? "open" : "closed"}
         className="fixed md:relative h-screen bg-black text-white flex flex-col overflow-hidden z-50"
-        style={{ 
+        style={{
           backgroundColor: "#0a0a0a",
           boxShadow: isMobile && isOpen ? "0 0 20px rgba(0,0,0,0.5)" : "none",
         }}
       >
-        {/* Sidebar Header - No animation on page change */}
+        {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4 md:p-6 min-h-[72px]">
           {isOpen ? (
             <div className="flex items-center gap-3">
@@ -238,25 +267,34 @@ export default function Sidebar() {
             style={{ color: "#94a3b8" }}
           >
             {isOpen ? (
-              isMobile ? <FiX size={20} /> : <FiChevronLeft size={20} />
+              isMobile ? (
+                <FiX size={20} />
+              ) : (
+                <FiChevronLeft size={20} />
+              )
             ) : (
               !isMobile && <FiChevronRight size={20} />
             )}
           </button>
         </div>
 
-        {/* Navigation Items - Hidden scrollbars on all screens */}
+        {/* Navigation Items */}
         <nav className="flex-1 px-2 md:px-4 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <ul className="space-y-1 md:space-y-2 pb-4">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
 
               return (
-                <li key={item.path} onClick={isMobile ? closeSidebar : undefined}>
+                <li
+                  key={item.path}
+                  onClick={isMobile ? closeSidebar : undefined}
+                >
                   <Link href={item.path} scroll={false}>
                     <div
                       className="relative flex items-center gap-4 px-3 md:px-4 py-3 rounded-xl cursor-pointer transition-colors duration-200"
-                      onMouseEnter={() => !isMobile && setHoveredItem(item.path)}
+                      onMouseEnter={() =>
+                        !isMobile && setHoveredItem(item.path)
+                      }
                       onMouseLeave={() => !isMobile && setHoveredItem(null)}
                       style={{
                         backgroundColor: isActive
@@ -285,12 +323,14 @@ export default function Sidebar() {
                               : "transparent",
                         }}
                       >
-                        <div style={{ color: isActive ? item.color : "#94a3b8" }}>
+                        <div
+                          style={{ color: isActive ? item.color : "#94a3b8" }}
+                        >
                           {item.icon}
                         </div>
                       </div>
 
-                      {/* Label - Only animate when toggling sidebar */}
+                      {/* Label */}
                       {isOpen && (
                         <span
                           className="text-sm font-medium truncate"
@@ -313,10 +353,11 @@ export default function Sidebar() {
         <div className="p-3 md:p-4 border-t border-gray-800">
           <div
             className="flex items-center gap-4 px-3 md:px-4 py-3 rounded-xl transition-colors duration-200"
-            onMouseEnter={() => !isMobile && setHoveredItem('footer')}
+            onMouseEnter={() => !isMobile && setHoveredItem("footer")}
             onMouseLeave={() => !isMobile && setHoveredItem(null)}
             style={{
-              backgroundColor: hoveredItem === 'footer' ? "#64748b20" : "transparent",
+              backgroundColor:
+                hoveredItem === "footer" ? "#64748b20" : "transparent",
             }}
           >
             <div
