@@ -1398,7 +1398,7 @@ DO NOT:
 
             <div className="pt-8 border-t border-gray-900 text-center text-gray-500">
               <p>
-                © 2024 AI Prompt Engineering Guide. All techniques tested with
+                © 2026 AI Prompt Engineering Guide. All techniques tested with
                 ChatGPT, Claude, Gemini, and DeepSeek.
               </p>
               <p className="mt-2 text-sm">
