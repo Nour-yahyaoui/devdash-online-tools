@@ -229,7 +229,7 @@ export default function DashboardPage() {
     
     {/* Simple description */}
     <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">
-      A modern Next.js 14 application with TypeScript, TailwindCSS, and Framer Motion. 
+      A modern Next.js 16 application with TypeScript, TailwindCSS, and Framer Motion. 
       Built with consistency, reusability, and developer experience in mind.
     </p>
     
